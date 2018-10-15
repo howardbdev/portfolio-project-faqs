@@ -18,4 +18,4 @@ The suggestions here about not spending too much time with styling are framed wi
 - You can go back and style up your apps in the future, especially once you've learned a ton more material (including JavaScript).
 - Once you've completed your Rails and JS projects, you'll have a better perspective about which projects you want to highlight to interviewers.
 
-None of these means that you _can't_ or _shouldn't_ style up your app!!  If you don't mind taking the time to do it, then go for it - 100%!!  When you do take the time to style an app, you'll learn invaluable CSS lessons.  So if you have the time to do it, and you want to, then go for it!  It's just not required for the project in terms of your assessment.
+None of these means that you _can't_ or _shouldn't_ style up your app!!  If you don't mind taking the time to do it, then go for it - 100%!!  When you do take the time to style an app, you'll learn valuable CSS lessons.  So if you have the time to do it, and you want to, then go for it!  It's just not required for the project in terms of your assessment.
