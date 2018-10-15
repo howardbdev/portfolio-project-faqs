@@ -27,15 +27,17 @@
 
 #### NOW, CONSIDER CONTROLLERS AND VIEWS
 
-6. Start with your ApplicationController helpers - #logged_in? and #current_user
+6. Start with your ApplicationController helpers - `#logged_in?` and `#current_user`
   - add your login/signup/signout routes
 
 7. Build out controller routes for other models (add a controller for each model)
 
 8. Build views and controller actions based on the flow of your app, one step at a time, testing as you go!
-  - Use shotgun and pry (or raise/inspect) all the time!
+  - Use `shotgun` and `pry` (or `raise`/`inspect`) all the time!
 
 
 ###### Using the corneal gem
 
-You are welcome to use the corneal gem.  However, you should understand what it's doing.  Remove any folders and files you're not using.  For example, if you're not going to write any tests, delete the `spec` folder.
+You are welcome to use the [corneal gem].  However, you should understand what it's doing.  Remove any folders and files you're not using.  For example, if you're not going to write any tests, delete the `spec` folder.
+
+[corneal gem]:https://github.com/thebrianemory/corneal
