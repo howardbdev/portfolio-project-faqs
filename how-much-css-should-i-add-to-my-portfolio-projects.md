@@ -13,8 +13,9 @@ That said, once your app is functional and meets requirements, feel free to go n
 **Regardless of your timing goals, your understanding is far more important than speed.**  Sprinting through the course without properly absorbing and digesting the material won't do anyone any good.  We want you to master the concepts and be a "no-brainer" hire when you're looking for a developer job.  _That's_ our goal.  So you _must_ take the time you need to understand the course material as you go along.
 
 The suggestions here about not spending too much time with styling are framed within the following context:
-  a.  most students want to complete the course ASAP
-  b.  you can go back and style up your apps in the future, especially once you've learned a ton more material (including JavaScript)
-  c.  once you've completed your Rails and JS projects, you'll have a better perspective about which projects you want to highlight to interviewers
+
+- Most students want to complete the course ASAP.
+- You can go back and style up your apps in the future, especially once you've learned a ton more material (including JavaScript).
+- Once you've completed your Rails and JS projects, you'll have a better perspective about which projects you want to highlight to interviewers.
 
 None of these means that you _can't_ or _shouldn't_ style up your app!!  If you don't mind taking the time to do it, then go for it - 100%!!  When you do take the time to style an app, you'll learn invaluable CSS lessons.  So if you have the time to do it, and you want to, then go for it!  It's just not required for the project in terms of your assessment.
