@@ -21,7 +21,7 @@
   - Model classes
   - Associations (& validations)
 
-5. Test your models and the associations in the console
+5. Test your models and associations in the console
   - create some seed data
   - adjust migrations as needed
 
