@@ -1,5 +1,9 @@
 ### WHAT ARE SOME GOOD RESOURCES FOR TECHNICAL INTERVIEW PREPARATION?
 
+### All/mixed Languages
+
+[10 Code Challenge Sites](https://medium.com/coderbyte/the-10-best-coding-challenge-websites-for-2018-12b57645b654)
+
 ### JavaScript
 
 [LinkToptal 37 JS IT Qs](https://www.toptal.com/javascript/interview-questions)
@@ -10,7 +14,6 @@
 
 [JS Scene](https://medium.com/javascript-scene/10-interview-questions-every-javascript-developer-should-know-6fa6bdf5ad95)
 
-[10 Code Challenge Sites](https://medium.freecodecamp.org/the-10-most-popular-coding-challenge-websites-of-2016-fb8a5672d22f)
 
 [Eric Elliott on Medium](https://medium.com/@_ericelliott)
 
