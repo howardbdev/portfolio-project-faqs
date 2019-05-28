@@ -32,7 +32,7 @@ This is not really just a question about hooks or Context.  What about a MERN st
 - use `create-react-app` to scaffold your app
 - use Rails to build a backend API you can write to
 - use React
-- use Redux 
+- use Redux
 
 #### Conclusion, for now
 
