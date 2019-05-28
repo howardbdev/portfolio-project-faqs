@@ -1,4 +1,3 @@
-# DRAFT - THIS ANSWER IS CURRENTLY IN BETA :stuck_out_tongue_winking_eye:
 ### CAN I USE HOOKS OR CONTEXT API FOR MY FINAL PROJECT?  DOES EITHER OF THOSE REPLACE REDUX?
 
 The short answers are no, no, and not exactly.  But please do read the long answer!
@@ -21,7 +20,19 @@ Now that you're angry for having learned and used Redux in a final project that'
 
 #### Context API
 
-[Check it out](https://reactjs.org/docs/context.html).  Do not take this oversimplified analogy as gospel, but you can think of Context as super-lightweight Redux without as many rules, and without as many tools.  (I made that up, it's a work in progress.)  Using the Context API does allow us to access state down to ancestors without passing props through a bunch of intermediate children components.  So does Redux.  Redux, however, allows us powerful dev tools and a global state with tightly controlled rules for change.  Context, not so much.  This does not mean one is better than the other; they are simply different and good for different use cases.  Yes, your project is likely too small and uncomplicated to warrant using Redux.  Yes, Context could make more sense and involves less syntax.  Yes, we still ask that you learn and use Redux.  (Trying to come up with a decent analogy here.. )  It's kind of like, "can't I just learn use a push mower rather than a John Deere tractor?"  Well, yes, but the John Deere tractor has a lot more to offer.  Hmm.. I think this analogy needs work...
+[Check it out](https://reactjs.org/docs/context.html).  Do not take this oversimplified analogy as gospel, but you can think of Context as super-lightweight Redux without as many rules, and without as many tools.  (I made that up, it's a work in progress.)  Using the Context API does allow us to access state down to ancestors without passing props through a bunch of intermediate children components.  So does Redux.  Redux, however, allows us powerful dev tools and a global state with tightly controlled rules for change.  Context, not so much.  This does not mean one is better than the other; they are simply different and good for different use cases.  Yes, your project is likely too small and uncomplicated to warrant using Redux.  Yes, Context could make more sense and involves less syntax.  Yes, we still ask that you learn and use Redux.  
+
+#### Not just hooks and Context API:
+
+This is not really just a question about hooks or Context.  What about a MERN stack?  How about WatermelonDB?  React Native? Vue.js?  The list goes on and on, and _of course_ you should be exploring modern frameworks and technologies.  But first, learn the curriculum.  It's not the end-all, be-all, but it's where you're starting.  And it's where you have instructors who can give you detailed help, guidance, and skill assessment.As an organization, and specifically as instructional staff, we're not equipped -- could not really be equipped -- to handle a wide open project assessment where everything is on the table.. Maybe we could, but we couldn't be as picky or thorough.  Learn the topics we teach first, and learn them well, while you have staff who can help you do so.  Then, take what you've learned and learn more -- focusing on the languages and frameworks that are most appealing to you and fit your style!
+
+#### ER, SO, _CAN_ I USE [__INSERT_NAME_HERE__] EXTERNAL, EXTRA-CURRICULAR LIBRARY ON MY FINAL PROJECT?
+
+* YES! --- As long as you are still meeting all the requirements and using the tools we're requesting you use.  But you _must_:
+- use `create-react-app` to scaffold your app
+- use Rails to build a backend API you can write to
+- use React
+- use Redux 
 
 #### Conclusion, for now
 
