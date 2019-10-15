@@ -24,7 +24,7 @@ Run `bundle install`.
 
 Head to `config/initializers/cors.rb` and uncomment the commented-out code.
 
-Change `origins 'example.com'` to `origins 'www.yourdomain.com'`.  Obviously, put in your domain.
+Change `origins 'example.com'` to `origins 'www.yourdomain.com'`.  Put in your frontend domain.
 
 Add `credentials: true` to the `resource` call, so:
 ```ruby
