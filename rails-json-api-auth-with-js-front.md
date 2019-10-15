@@ -307,7 +307,7 @@ end
 Since our controllers are now serving JSON, let's tweak `users#create`, `sessions#login` and `sessions#logout` accordingly:
 
 ```ruby
-# UsersController, POST /users
+# in UsersController
 def create
   @user = User.new(user_params)
   if @user.save
