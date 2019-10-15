@@ -267,7 +267,7 @@ Let's head back to our backend to continue our authentication configuration.  Ho
   end
 ```
 
-In our `users#create` action, you may recall seeing code something like this:
+In our `users#create` action of a full Rails app, you may recall seeing code something like this:
 ```ruby
 # POST /users
 def create
@@ -275,13 +275,13 @@ def create
   if @user.save
     # the act of logging in is really just adding a key/value pair to the session hash
     session[:user_id] = @user.id
-    render json: @user.to_json(only: [:id, :name, :email]), status: :created
+    redirect_to @user
   else
-    render json: @user.errors, status: :unprocessable_entity
+    flash[:message] = "Failed to create user"
+    render :new
   end
 end
 ```
-
 Likewise, once we have users signed up, perhaps we use a `SessionsController` or `AuthController` to handle logging in and out, something like:
 
 ```ruby
@@ -292,7 +292,7 @@ def login
     session[:user_id] = @user.id
     # then redirect to a landing page or whatever
   else
-    # communicate to the user their credentials are invalid
+    # communicate to the user their credentials are invalid, maybe using a flash message
   end
 end
 
@@ -303,8 +303,22 @@ def logout
 end
 ```
 
-Since our controllers are now serving JSON, let's tweak `#login` and `#logout` accordingly:
+Since our controllers are now serving JSON, let's tweak `users#create`, `sessions#login` and `sessions#logout` accordingly:
+
 ```ruby
+# UsersController, POST /users
+def create
+  @user = User.new(user_params)
+  if @user.save
+    # the act of logging in is really just adding a key/value pair to the session hash
+    session[:user_id] = @user.id
+    render json: @user.to_json(only: [:id, :name, :email]), status: :created
+  else
+    render json: @user.errors, status: :unprocessable_entity
+  end
+end
+
+# in SessionsController
 def login
   @user = User.find_by(email: params[:user][:email])
   if @user && @user.authenticate(params[:user][:password])
