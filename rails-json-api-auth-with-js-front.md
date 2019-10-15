@@ -138,7 +138,7 @@ followed by
 
 `rails db:migrate`
 
-To ensure we have hashed passwords and access to our `#password` getter and setter, as well as the `#authenticate` method, let's add
+To ensure we have hashed passwords and access to our `#password` setter, as well as the `#authenticate` method, let's add
 `has_secure_password` to our `User` model:
 ```ruby
 # inside app/models/user.rb
