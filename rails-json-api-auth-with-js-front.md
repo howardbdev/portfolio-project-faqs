@@ -346,11 +346,11 @@ One more controller action that will probably prove useful is an action to get t
 # in `SessionsController` or `UsersController`, whichever you prefer
 def get_current_user
   if logged_in?
-    render json: current_user.to_json(only: [:id, :name, :email])
+    render json: current_user.to_json(only: [:id, :name, :email]), status: :ok
   else
     render json: {
       message: "No one is currently logged in"
-    }
+    }, status: :unauthorized
   end
 end
 ```
