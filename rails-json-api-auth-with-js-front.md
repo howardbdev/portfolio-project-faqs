@@ -87,7 +87,7 @@ The `--api` flag removes a bunch of middleware from the generation of the Rails 
 
 If we want auth, though, it removes a little _too much_ middleware... more on that later.. Let's continue:
 
-We know we're going to want our Rails server to process AJAX requests from external domains, which means we need to enable Cross Origin Resource Sharing, or CORS.  In the `Gemfile`, comment in the line that says
+We know we're going to want our Rails server to process AJAX requests from external domains, which means we need to enable [Cross Origin Resource Sharing], or CORS.  In the `Gemfile`, comment in the line that says
 `gem 'rack-cors'`
 Then run `bundle install` again.
 
@@ -492,7 +492,7 @@ Access to fetch at 'http://localhost:3000/users' from origin 'http://localhost:8
 [React]: https://reactjs.org
 [Jbuilder]: https://github.com/rails/jbuilder
 [`#to_json`]: https://apidock.com/rails/ActiveRecord/Serialization/to_json
-[CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[Cross Origin Resource Sharing]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [Aysychronous JavaScript and XML]: https://developer.mozilla.org/en-US/docs/Glossary/AJAX
 [jQuery's `.ajax()`]: https://api.jquery.com/jquery.ajax/
 [read the docs]: https://github.com/codahale/bcrypt-ruby
