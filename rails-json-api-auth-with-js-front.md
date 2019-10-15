@@ -482,7 +482,7 @@ the current user is {id: 10, name: "Mo", email: "mo@mo.com"}
 
 YASSSSSS!!!!  Now, of course, instead of just logging to the console, we'd likely do something with our user on the front end.  Maybe stash it into whatever state management system we're using, whether it's React state, Redux, or any other flavor or JS we like.  And, of course, since we're building an SPA, instead of refreshing the page to get results, we'll want to update our DOM by invoking the proper methods and functions we've built to do so on our front end.  Which is a whole other thing, altogether.
 
-What do you think?  That's pretty much it!  Feel free to leave comments below.
+What do you think?  That's pretty much it!  Comments and feedback are welcome.  But be nice.
 
 One more thing -- here are a couple common config errors you might encounter...
 
