@@ -422,7 +422,7 @@ The first hit is [MDN's "Using Fetch"] article, where it says
 ```
 By default, `fetch` won't send or receive any cookies from the server, resulting in unauthenticated requests if the site relies on maintaining a user session (to send cookies, the credentials `init option` must be set).
 ```
-https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+_source:_ https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
 If we click ["init option"], we're taken to MDN's _[WindowOrWorkerGlobalScope.fetch()]_ article, where it says
 
@@ -434,13 +434,13 @@ init | Optional
 ```
   credentials: The request credentials you want to use for the request: omit, same-origin, or include. To automatically send cookies for the current domain, this option must be provided. Starting with Chrome 50, this property also takes a FederatedCredential instance or a PasswordCredential instance.
 ```
-https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters
+_source:_ https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters
 
 To get a little more info, we might head to [MDN's "Request.credentials"] article, and we find out a little more about the `include` value of the `credentials` option:
 ```
 include: Always send user credentials (cookies, basic http auth, etc..), even for cross-origin calls.
 ```
-https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials
+_source:_ https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials
 
 BINGO!
 
