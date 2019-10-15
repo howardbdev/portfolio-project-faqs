@@ -62,7 +62,7 @@ And that's it!  Now your Rails responses will include an HTTP-only cookie with s
 
 To log out, `session.clear`.
 
-For authorization, protect controller actions, such as in `secrets_controller.rb`:
+For authorization, protect your controller actions.  For example, in `SecretsController`:
 ```ruby
   def show
     @secret = Secret.find(params[:id])
