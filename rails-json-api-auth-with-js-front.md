@@ -11,73 +11,6 @@ Criteria for this blog to be applicable:
 - Some kind of JS frontend that sends AJAX requests (could be Vanilla JS, React, or some other JS framework)
 - JS frontend must have an identifiable domain that can be whitelisted
 
-No time?  Just want the quick setup?  OK. Here's the short version:
-## QUICK CONFIG GUIDE
-
-In your `Gemfile`:
-
-Add or uncomment `rack-cors`.
-
-Add or uncomment `bcrypt` if you want secure passwords (and you do).
-
-Run `bundle install`.
-
-Head to `config/initializers/cors.rb` and uncomment the commented-out code.
-
-Change `origins 'example.com'` to `origins 'www.yourdomain.com'`.  Put in your frontend domain.
-
-Add `credentials: true` to the `resource` call, so:
-```ruby
-resource '*',
-  headers: :any,
-  methods: [:get, :post, :put, :patch, :delete, :options, :head],
-  credentials: true
-```
-
-Add these two lines of code to `config/application.rb` inside the `Application` class:
-```ruby
-config.middleware.use ActionDispatch::Cookies
-config.middleware.use ActionDispatch::Session::CookieStore, key: '_cookie_name', expire_after: 14.days, httponly: true
-```
-
-Add to `ApplicationController`:
-
-`include ActionController::Cookies`
-
-Now, with every AJAX request, add `credentials: "include"` in the options, such as:
-
-```js
-fetch("http://localhost:8000/users/12/secrets", {
-  method: "GET",
-  credentials: "include",
-  headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json"
-  }
-})
-  .then(response => response.json())
-  .then(doAwesomeThingsWithYourSecrets)
-```
-And that's it!  Now your Rails responses will include an HTTP-only cookie with session info.  And each AJAX request with `credentials: "include"` will send that cookie back to be authenticated.  To log in, add a unique, identifying key/value pair to `session` such as `session[:user_id] = @user.id` in your login controller action after confirming correct login credentials.  Add session helper methods such as `#current_user` and `#logged_in?` to your `ApplicationController` if you like.
-
-To log out, `session.clear`.
-
-For authorization, protect your controller actions.  For example, in `SecretsController`:
-```ruby
-  def show
-    @secret = Secret.find(params[:id])
-    if @secret.user == current_user
-      render json: @secret.to_json(only: [:content, :id]), status: :ok
-    else
-      render json: {
-        error: "Those aren't your secrets!"
-      }, status: :unauthorized
-    end
-  end
-```
-Easy peasy!
-
-## SLIGHTLY MORE DETAILED GUIDE
 _Follow along to build a Rails backend that can handle auth.  Up to you to provide the frontend of your choice._
 
 Run `rails new secrets-backend --api`.
@@ -224,7 +157,7 @@ Done.  Now we've got a JS frontend communicating with a Rails JSON API backend. 
 
 **Authorization**: Once we've established the user's identity, ensure the user is allowed to do the thing the user is trying to do.
 
-This blog focuses on authentication.  _(Although we briefly mentioned authorization in the quick guide.)_
+This blog focuses on authentication.  _(There is a small authorization example at the end.)_
 
 To keep track of user sessions, we need signup, login, and logout functionality.  Let's start with signup.  Signup represents creating a user.  From there, it's up to you, the developer, whether you send the user back to a login page or log the user in automatically on signup.  Let's go with the latter for this example.
 
@@ -481,6 +414,22 @@ the current user is {id: 10, name: "Mo", email: "mo@mo.com"}
 ```
 
 YASSSSSS!!!!  Now, of course, instead of just logging to the console, we'd likely do something with our user on the front end.  Maybe stash it into whatever state management system we're using, whether it's React state, [Redux], or any other flavor or JS we like.  And, of course, since we're building an SPA, instead of refreshing the page to get results, we'll want to update our DOM by invoking the proper methods and functions we've built to do so on our front end.  Which is a whole other thing, altogether.
+
+And that's it!  Now your Rails responses will include an HTTP-only cookie with session info.  And each AJAX request with `credentials: "include"` will send that cookie back to be authenticated.
+
+For authorization, protect your controller actions.  For example, in `SecretsController`:
+```ruby
+  def show
+    @secret = Secret.find(params[:id])
+    if @secret.user == current_user
+      render json: @secret.to_json(only: [:content, :id]), status: :ok
+    else
+      render json: {
+        error: "Those aren't your secrets!"
+      }, status: :unauthorized
+    end
+  end
+```
 
 What do you think?  That's pretty much it!  Comments and feedback are welcome.  But be nice.
 
