@@ -225,7 +225,7 @@ Done.  Now we've got a JS frontend communicating with a Rails JSON API backend. 
 
 This blog focuses on authentication.  Although we briefly mentioned authorization in the quick guide.
 
-Sign up, log in, and log out functionality is all going to be required if we want to be able to keep track of our users.  Let's start with signup.  Signup represents creating a user.  From there, it's up to you, the developer, whether you send the user back to a login page or log the user in automatically on signup.  Let's go with the latter for this example.
+To keep track of user sessions, we need signup, login, and logout functionality.  Let's start with signup.  Signup represents creating a user.  From there, it's up to you, the developer, whether you send the user back to a login page or log the user in automatically on signup.  Let's go with the latter for this example.
 
 Suppose we have a signup form that gathers a user's name, email, and password.  We put the attributes into an object and pass it to the function we're using to send our POST request.  We might put together a request that looks something like this:
 ```javascript
