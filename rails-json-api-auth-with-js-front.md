@@ -484,7 +484,7 @@ YASSSSSS!!!!  Now, of course, instead of just logging to the console, we'd likel
 
 What do you think?  That's pretty much it!  Comments and feedback are welcome.  But be nice.
 
-One more thing -- here are a couple common config errors you might encounter...
+### Some common config errors you might encounter: 
 
 If you leave the wildcard `'*'` as your origin and add `credentials: true`, Rails won't even allow the server to run:
 
