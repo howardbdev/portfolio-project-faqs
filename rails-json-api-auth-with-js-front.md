@@ -374,7 +374,7 @@ We are bringing back middleware for cookies and sessions... who doesn't love a g
 - `:key` is just that -- the key the cookie is stored under in the browser.
 - `:expire_after` allows us to set an expiration time for our cookies (the more sensitive the app's data, the shorter the cookie's lifespan should be).
 - `:httponly` is an extra option to ensure our cookies are less vulnerable to an [XSS attack].
-- `:secure` Defaults to `false`, but add `secure: true` only if running on HTTPS.  `localhost`, does not, so it's not included in the example code.
+- `:secure` Defaults to `false`, but add `secure: true` only if running on HTTPS.  `localhost` does not, so it's not included in the example code.
 
 Now we have to explicitly tell Rails to use the middleware we just turned back on.  We can do this on a controller-specific basis, but the easiest way is to just add to `ApplicationController`:
 
