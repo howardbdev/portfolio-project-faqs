@@ -268,7 +268,7 @@ Let's head back to our backend to continue our authentication configuration.  Ho
   end
 ```
 
-In our `users#create` action of a full Rails app, you may recall seeing code something like this:
+In the `users#create` action of a full Rails app, you may recall seeing code something like this:
 ```ruby
 # POST /users
 def create
