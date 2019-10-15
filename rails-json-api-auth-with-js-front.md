@@ -124,7 +124,7 @@ With our basic CORS config setup, let's pause and scaffold out a user model we c
 ```ruby
 gem 'bcrypt', '~> 3.1.7'
 ```
-_note: the version number seen here is from running a `rails new` command with Rails 6.0.0... of course versions change and might be different for you if you're running the same command in the future... or in the past... or with different versions..._
+_Note: the version number seen here is from running a `rails new` command with Rails 6.0.0... of course versions change and might be different for you if you're running the same command in the future... or in the past... or with different versions..._
 
 Run `bundle install`.
 
