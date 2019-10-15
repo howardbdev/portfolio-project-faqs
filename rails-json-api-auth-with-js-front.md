@@ -253,7 +253,7 @@ Anyway, now let's see what the console shows us:
 ```
 > {id: 5, name: "Felicia", email: "felicia@felicia.com"}
 ```
-Success!  But wait, we're talking about auth...?  Right now, even though we can create a user, there is no session.  So the neither the frontend nor the backend is aware of who the current user is.  Let's fix that.
+Success!  But wait, we're talking about auth...?  Right now, even though we can create a user, there is no session.  So neither the frontend nor the backend is aware of who the current user is.  Let's fix that.
 
 Let's head back to our backend to continue our authentication configuration.  Hopefully you are familiar with using a basic auth setup on a full Rails app -- one where Rails is serving the views via `.erb` files.  Basically, we're going to use [Rails's `session` hash] to store an identifiable bit of info about a logged in user after signing up or logging in.  Logging out involves clearing the `session` hash.  Here are some likely helper methods we might include in `ApplicationController`:
 
