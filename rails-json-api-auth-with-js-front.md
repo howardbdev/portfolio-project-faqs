@@ -419,28 +419,28 @@ What gives?  So not only did we need to tell Rails to look out for session cooki
 
 The first hit is [MDN's "Using Fetch"] article, where it says
 
-```
-By default, `fetch` won't send or receive any cookies from the server, resulting in unauthenticated requests if the site relies on maintaining a user session (to send cookies, the credentials `init option` must be set).
-```
-_source:_ https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+> ```
+> By default, `fetch` won't send or receive any cookies from the server, resulting in unauthenticated requests if the site relies on maintaining a user session (to send cookies, the credentials `init option` must be set).
+>```
+> _source:_ https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
 If we click ["init option"], we're taken to MDN's _[WindowOrWorkerGlobalScope.fetch()]_ article, where it says
 
-```
-init | Optional
-  An options object containing any custom settings that you want to apply to the request. The possible options are:
-```
-  _...a whole bunch of options are described here here, including (hopefully) familiar properties such as `headers` and `method`, but `credentials` is what we want:_
-```
-  credentials: The request credentials you want to use for the request: omit, same-origin, or include. To automatically send cookies for the current domain, this option must be provided. Starting with Chrome 50, this property also takes a FederatedCredential instance or a PasswordCredential instance.
-```
-_source:_ https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters
+>```
+>init | Optional
+>  An options object containing any custom settings that you want to apply to the request. The possible options are:
+>```
+>  _...a whole bunch of options are described here here, including (hopefully) familiar properties such as `headers` and `method`, but `credentials` is what we want:_
+>```
+>  credentials: The request credentials you want to use for the request: omit, same-origin, or include. To automatically send cookies for the current domain, this option must be provided. Starting with Chrome 50, this property also takes a FederatedCredential instance or a PasswordCredential instance.
+>```
+>_source:_ https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters
 
 To get a little more info, we might head to [MDN's "Request.credentials"] article, and we find out a little more about the `include` value of the `credentials` option:
-```
-include: Always send user credentials (cookies, basic http auth, etc..), even for cross-origin calls.
-```
-_source:_ https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials
+>```
+>include: Always send user credentials (cookies, basic http auth, etc..), even for cross-origin calls.
+>```
+>_source:_ https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials
 
 BINGO!
 
