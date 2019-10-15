@@ -219,9 +219,9 @@ And we check our console... success!
 
 Done.  Now we've got a JS frontend communicating with a Rails JSON API backend.  What did we come here for, again?  Oh yeah, auth.  We're not close to done.  OK, what is auth, anyway?  It's actually two things:
 
-**Authentication**: Ensure the user is who the user claims to be
+**Authentication**: Ensure the user is who the user claims to be.
 
-**Authorization**: Once we've established the user's identity, ensure the user is allowed to do the thing the user is trying to do
+**Authorization**: Once we've established the user's identity, ensure the user is allowed to do the thing the user is trying to do.
 
 This blog focuses on authentication.  Although we briefly mentioned authorization in the quick guide.
 
