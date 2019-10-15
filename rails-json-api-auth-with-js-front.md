@@ -283,7 +283,7 @@ def create
   end
 end
 ```
-Likewise, once we have users signed up, perhaps we use a `SessionsController` or `AuthController` to handle logging in and out, something like:
+Likewise, once we have users signed up, perhaps we use a `SessionsController` to handle logging in and out, something like:
 
 ```ruby
 # POST /login
