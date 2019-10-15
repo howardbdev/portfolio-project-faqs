@@ -310,7 +310,7 @@ Since our controllers are now serving JSON, let's tweak `users#create`, `session
 def create
   @user = User.new(user_params)
   if @user.save
-    # the act of logging in is really just adding a key/value pair to the session hash
+    # still just adding a key/value pair to the session hash
     session[:user_id] = @user.id
     render json: @user.to_json(only: [:id, :name, :email]), status: :created
   else
