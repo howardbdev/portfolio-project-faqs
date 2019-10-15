@@ -80,8 +80,8 @@ Easy peasy!
 ## SLIGHTLY MORE DETAILED GUIDE
 _Follow along to build a Rails backend that can handle auth.  Up to you to provide the frontend of your choice._
 
-Run `rails new secrets-backend --api`
-Of course, "secrets-backend" is the name of your app.
+Run `rails new secrets-backend --api`.
+Of course, "secrets-backend" is the name of your Rails app.
 
 The `--api` flag removes a bunch of middleware from the generation of the Rails application.  It also changes the configuration of some of the generators.  We are saying, "Hey Rails, how's it going?  For this app you can take it easy -- no need to include middleware for views since we're just going to be returning JSON."
 
