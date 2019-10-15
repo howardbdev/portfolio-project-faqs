@@ -224,7 +224,7 @@ Done.  Now we've got a JS frontend communicating with a Rails JSON API backend. 
 
 **Authorization**: Once we've established the user's identity, ensure the user is allowed to do the thing the user is trying to do.
 
-This blog focuses on authentication.  Although we briefly mentioned authorization in the quick guide.
+This blog focuses on authentication.  _(Although we briefly mentioned authorization in the quick guide.)_
 
 To keep track of user sessions, we need signup, login, and logout functionality.  Let's start with signup.  Signup represents creating a user.  From there, it's up to you, the developer, whether you send the user back to a login page or log the user in automatically on signup.  Let's go with the latter for this example.
 
