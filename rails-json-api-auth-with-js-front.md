@@ -241,7 +241,7 @@ Suppose we have a signup form that gathers a user's name, email, and password.  
     .then(response => response.json())
     .then(console.log)
 ```
-_Note: notice the `user` key in `userData`... Rails will attempt to [wrap params] in the appropriate key and it might work as long as all properties match columns in the database table.  Since bcrypt uses a column of `password_digest` but a setter method of `#password=`, we have to specify what to allow.  Here, we're choosing to wrap the incoming params under a top-level key of `:user`, while adjusting our strong params method as follows:_
+_Note: notice the `:user` key in `userData`... Rails will attempt to [wrap params] in the appropriate key and it might work as long as all properties match columns in the database table.  Since bcrypt uses a column of `password_digest` but a setter method of `#password=`, we have to specify what to allow.  Here, we're choosing to wrap the incoming params under a top-level key of `:user`, while adjusting our strong params method as follows:_
 ```ruby
 def user_params
   params.require(:user).permit(:name, :email, :password)
