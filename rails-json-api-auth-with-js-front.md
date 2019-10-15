@@ -182,6 +182,7 @@ def index
   render json: @users.to_json(only: [:id, :name, :email]), status: :ok
 end
 ```
+_Note: of course, it may not make sense to have a users index, but this is just for the demo..._
 
 Let's run our Rails server and see what we get.  We've left the default settings, so our Rails server is running on `http://localhost:3000`.  _Another note here: it might be a good idea to namespace your API with "api" and/or a version number, such as `http://localhost:3000/api/v1/users`.  Again, not the focus of this blog, so we're sticking to bare bones on this front._  Navigating to `http://localhost:3000/users` gives us our JSON response:
 
