@@ -2,7 +2,7 @@
 _Session management with a familiar tool -- Rails's session!_
 
 [Rails JSON API] backend?
-JS frontend?
+[JavaScript] frontend?
 Want users to be able to sign up, log in, and log out?  Maintain their session even after closing browser tab?
 
 Criteria for this blog to be applicable:
@@ -415,7 +415,7 @@ the current user is {message: "No one is currently logged in"}
 
 If you've been following along, your user database is probably growing in size, and your list of creative names to use is probably shrinking, hopefully not along with your patience.  ;p
 
-What gives?  So not only did we need to tell Rails to look out for session cookie info, we also need to tell _JavaScript_ to _include_ said cookies in our AJAX requests!  BUT WAIT... Rails is, well, Ruby on Rails, with tons of helper methods and "magic", and JavaScript is, well, not Rails!  And we've disconnected our application so that we have a totally separate frontend and backend.  So how do we take this "final" step?  We Google, "how to include credentials in a fetch request"... And if we're me, we tack "MDN" to the front of that, so "MDN how to include credentials in a fetch request"
+What gives?  So not only did we need to tell Rails to look out for session cookie info, we also need to tell _JavaScript_ to _include_ said cookies in our AJAX requests!  BUT WAIT... Rails is, well, [Ruby on Rails], with tons of helper methods and "magic", and [JavaScript] is, well, not Rails!  And we've disconnected our application so that we have a totally separate frontend and backend.  So how do we take this "final" step?  We Google, "how to include credentials in a fetch request"... And if we're me, we tack "MDN" to the front of that, so "MDN how to include credentials in a fetch request"
 
 The first hit is [MDN's "Using Fetch"] article, where it says
 
@@ -480,11 +480,11 @@ And now, when we go to sign Mo up, then refresh the page and check the console:
 the current user is {id: 10, name: "Mo", email: "mo@mo.com"}
 ```
 
-YASSSSSS!!!!  Now, of course, instead of just logging to the console, we'd likely do something with our user on the front end.  Maybe stash it into whatever state management system we're using, whether it's React state, Redux, or any other flavor or JS we like.  And, of course, since we're building an SPA, instead of refreshing the page to get results, we'll want to update our DOM by invoking the proper methods and functions we've built to do so on our front end.  Which is a whole other thing, altogether.
+YASSSSSS!!!!  Now, of course, instead of just logging to the console, we'd likely do something with our user on the front end.  Maybe stash it into whatever state management system we're using, whether it's React state, [Redux], or any other flavor or JS we like.  And, of course, since we're building an SPA, instead of refreshing the page to get results, we'll want to update our DOM by invoking the proper methods and functions we've built to do so on our front end.  Which is a whole other thing, altogether.
 
 What do you think?  That's pretty much it!  Comments and feedback are welcome.  But be nice.
 
-### Some common config errors you might encounter: 
+### Some common config errors you might encounter:
 
 If you leave the wildcard `'*'` as your origin and add `credentials: true`, Rails won't even allow the server to run:
 
@@ -515,6 +515,9 @@ Access to fetch at 'http://localhost:3000/users' from origin 'http://localhost:8
 [Fetch API]: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 [FastJsonapi]: https://github.com/Netflix/fast_jsonapi
 [`CookieStore`]: https://api.rubyonrails.org/v5.2.1/classes/ActionDispatch/Session/CookieStore.html
+[Ruby on Rails]: https://rubyonrails.org
+[JavaScript]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[Redux]: https://redux.js.org
 [MDN's "Using Fetch"]: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 ["init option"]: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters
 [WindowOrWorkerGlobalScope.fetch()]: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters
