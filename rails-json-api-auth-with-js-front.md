@@ -420,9 +420,38 @@ And now, when we go to sign Mo up, then refresh the page and check the console:
 the current user is {id: 10, name: "Mo", email: "mo@mo.com"}
 ```
 
-YASSSSSS!!!!  Now, of course, instead of just logging to the console, we'd likely do something with our user on the front end.  Maybe stash it into whatever state management system we're using, whether it's React state, [Redux], or any other flavor or JS we like.  And, of course, since we're building an SPA, instead of refreshing the page to get results, we'll want to update our DOM by invoking the proper methods and functions we've built to do so on our front end.  Which is a whole other thing, altogether.
+Yaaaaaayyy!!!!  
+
+If we've defined our logout in `config/routes.rb` route as
+
+`delete "/logout", to: "sessions#logout"`
+
+then we could test logout functionality with:
+
+```js
+fetch("http://localhost:3000/logout", {
+  method: "DELETE",
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  }
+})
+  .then(response => response.json())
+  .then(console.log)
+```
+We should see in our console:
+```js
+{message: Successfully logged out}
+```
+Refresh, and watch the console again:
+```
+the current user is {message: "No one is currently logged in"}
+```
 
 And that's it!  Now your Rails responses will include an HTTP-only cookie with session info.  And each AJAX request with `credentials: "include"` will send that cookie back to be authenticated.
+
+Of course, instead of just logging responses to the console, we'd likely do something with them on the front end.  Maybe stash the current user into whatever state management system we're using, whether it's React state, [Redux], or any other flavor or JS we like.  And, of course, since we're building an SPA, instead of refreshing the page to get results, we'll want to update our DOM by invoking the proper methods and functions we've built to do so on our front end.  Which is a whole other thing, altogether.
 
 For authorization, protect your controller actions.  For example, suppose we've added a `Secret` model and associations such that a user `has_many :secrets` and a secret `belongs_to :user`.  If we don't want anyone but the secret's owner to see a secret, then in `SecretsController`:
 ```ruby
