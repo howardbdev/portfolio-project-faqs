@@ -292,7 +292,7 @@ def get_current_user
   end
 end
 ```
-So let's put this together with a new user and see what happens.  The test will be as follows:  we'll send a POST request to sign up a new user.  With the code we added to `users#create`, adding the user's id to the `session` hash, we should be logged in and the current user should appear in the console on a page refresh (remember that in our POST `/users` request shown earlier we just passed `console.log` as our callback to the second `.then()`).
+So let's put this together with a new user and see what happens.  The test will be as follows:  we'll send a POST request to sign up a new user (we could just as easily use login, either will do).  With the code we added to `users#create`, adding the user's id to the `session` hash, we should be logged in and the current user should appear in the console on a page refresh (remember that in our POST `/users` request shown earlier we just passed `console.log` as our callback to the second `.then()`).
 
 But alas, what we're still seeing is:
 ```
@@ -350,8 +350,6 @@ _Restarts Rails server, fills out signup form with Darlene's info, refreshes to 
 ```
 the current user is {message: "No one is currently logged in"}
 ```
-
-If you've been following along, your user database is probably growing in size, and your list of creative names to use is probably shrinking, hopefully not along with your patience.  ;p
 
 What gives?  So not only did we need to tell Rails to look out for session cookie info, we also need to tell _JavaScript_ to _include_ said cookies in our AJAX requests!  BUT WAIT... Rails is, well, [Ruby on Rails], with tons of helper methods and "magic", and [JavaScript] is, well, not Rails!  And we've disconnected our application so that we have a totally separate frontend and backend.  So how do we take this "final" step?  We Google, "how to include credentials in a fetch request"... And if we're me, we tack "MDN" to the front of that, so "MDN how to include credentials in a fetch request"
 
