@@ -188,7 +188,7 @@ end
 
 Anyway, now let's see what the console shows us:
 ```
-> {id: 5, name: "Felicia", email: "felicia@felicia.com"}
+{id: 5, name: "Felicia", email: "felicia@felicia.com"}
 ```
 Success!  But wait, we're talking about auth...?  Right now, even though we can create a user, there is no session.  So neither the frontend nor the backend is aware of who the current user is.  Let's fix that.
 
