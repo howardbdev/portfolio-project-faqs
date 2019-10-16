@@ -294,7 +294,20 @@ def get_current_user
   end
 end
 ```
-So let's put this together with a new user and see what happens.  The test will be as follows:  we'll send a POST request to sign up a new user (we could just as easily use login, either will do).  With the code we added to `users#create`, adding the user's id to the `session` hash, we should be logged in and the current user should appear in the console on a page refresh (remember that in our POST `/users` request shown earlier we just passed `console.log` as our callback to the second `.then()`).
+We can hit this controller action with an AJAX call like this:
+```js
+fetch("http://localhost:3000/get_current_user", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  }
+})
+  .then(response => response.json())
+  .then(console.log)
+```
+
+So let's put this together with a new user and see what happens.  The test will be as follows:  we'll send a POST request to sign up a new user (we could just as easily use login, either will do).  With the code we added to `users#create`, adding the user's id to the `session` hash, we should be logged in and the current user should appear in the console on a page refresh (notice in our `POST '/users'` and `GET '/get_current_user'` requests shown earlier we just passed `console.log` as our callback to the second `.then()`).
 
 But alas, what we're still seeing is:
 ```
