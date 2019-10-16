@@ -384,7 +384,7 @@ To get a little more info, we might head to [MDN's "Request.credentials"] articl
 
 BINGO!
 
-So now, we need to add that option to our fetch requests, both for signing up and getting the current user:
+So now, we just need to add `credentials: "true"` to all our fetch requests, like so:
 
 ```javascript
 // suppose our `userData` is `{user: {name: "Mo", email: "mo@mo.com", password: "password"}}`
@@ -422,15 +422,15 @@ the current user is {id: 10, name: "Mo", email: "mo@mo.com"}
 
 Yaaaaaayyy!!!!  
 
-If we've defined our logout in `config/routes.rb` route as
+If we've defined our logout route in `config/routes.rb` as
 
-`delete "/logout", to: "sessions#logout"`
+`post "/logout", to: "sessions#logout"`
 
-then we could test logout functionality with:
+then we could test logout functionality:
 
 ```js
 fetch("http://localhost:3000/logout", {
-  method: "DELETE",
+  method: "POST",
   credentials: "include",
   headers: {
     "Content-Type": "application/json",
@@ -448,6 +448,7 @@ Refresh, and watch the console again:
 ```
 the current user is {message: "No one is currently logged in"}
 ```
+_Wait, why did we [use POST as our HTTP method for logout]? What about GET, or maybe DELETE?  Good question.  Although we're not deleting a record from a database, it does seem like we are "deleting" something, albeit an abstract something -- the user session.  However if we [compare MDN's descriptions of HTTP methods] notice POST's description is more open to what's happening here.  DELETE seems to imply we're deleting an actual resource, which we're not.  Of course, you're encouraged to [read] [more] [about it] and decide which verb you with to use for logout on your app._
 
 And that's it!  Now your Rails responses will include an HTTP-only cookie with session info.  And each AJAX request with `credentials: "include"` will send that cookie back to be authenticated.
 
@@ -512,3 +513,8 @@ Access to fetch at 'http://localhost:3000/users' from origin 'http://localhost:8
 [MDN's "Request.credentials"]: https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials
 [XSS attack]: https://humanwhocodes.com/blog/2009/05/12/cookies-and-security/
 [Rails's `session` hash]: https://guides.rubyonrails.org/security.html#sessions
+[use POST as our HTTP method for logout]: https://softwareengineering.stackexchange.com/questions/196871/what-http-verb-should-the-route-to-log-out-of-your-web-app-be
+[compare MDN's descriptions of HTTP methods]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+[read]: https://stackoverflow.com/questions/15098392/which-http-method-should-login-and-logout-actions-use-in-a-restful-setup?noredirect=1&lq=1
+[more]: https://stackoverflow.com/questions/3521290/logout-get-or-post/14587231#14587231
+[about it]: https://stackoverflow.com/questions/7140074/restfully-design-login-or-register-resources
