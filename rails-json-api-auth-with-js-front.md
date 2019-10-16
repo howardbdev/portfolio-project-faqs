@@ -235,7 +235,7 @@ end
 
 # DELETE /logout
 def logout
-  session.clear
+  reset_session
   # redirect back to a home or landing page
 end
 ```
@@ -269,7 +269,7 @@ def login
 end
 
 def logout
-  session.clear
+  reset_session
   render json: {
     message: "Successfully logged out"
   }, status: :ok
