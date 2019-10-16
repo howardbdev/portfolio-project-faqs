@@ -380,7 +380,7 @@ To get a little more info, we might head to [MDN's "Request.credentials"] articl
 
 BINGO!
 
-So now, we just need to add `credentials: "include"` to all our fetch requests, like so:
+So now, we just need to add `credentials: "include"` to all our AJAX calls, like so:
 
 ```javascript
 // suppose our `userData` is `{user: {name: "Mo", email: "mo@mo.com", password: "password"}}`
