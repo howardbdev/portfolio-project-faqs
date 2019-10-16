@@ -1,5 +1,5 @@
 # Authentication with a Rails API
-_Session management with a familiar tool -- Rails's session!_
+_Session management with a familiar tool -- Rails's `session`!_
 
 [Rails JSON API] backend?
 [JavaScript] frontend?
@@ -11,73 +11,6 @@ Criteria for this blog to be applicable:
 - Some kind of JS frontend that sends AJAX requests (could be Vanilla JS, React, or some other JS framework)
 - JS frontend must have an identifiable domain that can be whitelisted
 
-No time?  Just want the quick setup?  OK. Here's the short version:
-## QUICK CONFIG GUIDE
-
-In your `Gemfile`:
-
-Add or uncomment `rack-cors`.
-
-Add or uncomment `bcrypt` if you want secure passwords (and you do).
-
-Run `bundle install`.
-
-Head to `config/initializers/cors.rb` and uncomment the commented-out code.
-
-Change `origins 'example.com'` to `origins 'www.yourdomain.com'`.  Put in your frontend domain.
-
-Add `credentials: true` to the `resource` call, so:
-```ruby
-resource '*',
-  headers: :any,
-  methods: [:get, :post, :put, :patch, :delete, :options, :head],
-  credentials: true
-```
-
-Add these two lines of code to `config/application.rb` inside the `Application` class:
-```ruby
-config.middleware.use ActionDispatch::Cookies
-config.middleware.use ActionDispatch::Session::CookieStore, key: '_cookie_name', expire_after: 14.days, httponly: true
-```
-
-Add to `ApplicationController`:
-
-`include ActionController::Cookies`
-
-Now, with every AJAX request, add `credentials: "include"` in the options, such as:
-
-```js
-fetch("http://localhost:8000/users/12/secrets", {
-  method: "GET",
-  credentials: "include",
-  headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json"
-  }
-})
-  .then(response => response.json())
-  .then(doAwesomeThingsWithYourSecrets)
-```
-And that's it!  Now your Rails responses will include an HTTP-only cookie with session info.  And each AJAX request with `credentials: "include"` will send that cookie back to be authenticated.  To log in, add a unique, identifying key/value pair to `session` such as `session[:user_id] = @user.id` in your login controller action after confirming correct login credentials.  Add session helper methods such as `#current_user` and `#logged_in?` to your `ApplicationController` if you like.
-
-To log out, `session.clear`.
-
-For authorization, protect your controller actions.  For example, in `SecretsController`:
-```ruby
-  def show
-    @secret = Secret.find(params[:id])
-    if @secret.user == current_user
-      render json: @secret.to_json(only: [:content, :id]), status: :ok
-    else
-      render json: {
-        error: "Those aren't your secrets!"
-      }, status: :unauthorized
-    end
-  end
-```
-Easy peasy!
-
-## SLIGHTLY MORE DETAILED GUIDE
 _Follow along to build a Rails backend that can handle auth.  Up to you to provide the frontend of your choice._
 
 Run `rails new secrets-backend --api`.
@@ -87,8 +20,12 @@ The `--api` flag removes a bunch of middleware from the generation of the Rails 
 
 If we want auth, though, it removes a little _too much_ middleware... more on that later.. Let's continue:
 
-We know we're going to want our Rails server to process AJAX requests from external domains, which means we need to enable [Cross Origin Resource Sharing], or CORS.  In the `Gemfile`, comment in the line that says
+We know we're going to want our Rails server to process AJAX requests from external domains, which means we need to enable [Cross Origin Resource Sharing], or CORS.
+
+In the `Gemfile`, comment in the line that says
+
 `gem 'rack-cors'`
+
 Then run `bundle install` again.
 
 Enabling the `rack-cors` gem is not enough -- we also need to adjust the CORS configuration.  So let's open `config/initializers/cors.rb`.  First, uncomment this code:
@@ -124,7 +61,7 @@ With our basic CORS config setup, let's pause and scaffold out a user model we c
 ```ruby
 gem 'bcrypt', '~> 3.1.7'
 ```
-_Note: the version number seen here is from running a `rails new` command with Rails 6.0.0... of course versions change and might be different for you if you're running the same command in the future... or in the past... or with different versions..._
+_Note: The version number seen here is from running a `rails new` command with Rails 6.0.0... of course versions change and might be different for you if you're running the same command in the future... or in the past... or with different versions..._
 
 Run `bundle install`.
 
@@ -171,7 +108,7 @@ couLoading development environment (Rails 6.0.0)
 ```
 This is looking good.
 
-We have scaffolded a user, added `bcrypt`, and created some seed data.  Let's have a look at what Rails's scaffold generator gives us for a controller since we used the `--api` flag.  Notice we have a two private methods, `#set_user` to grab the user when the `:id` exists in the URL, and `#user_params` to enforce the strong params feature.  Notice the absence of `#new` and `#edit` actions, since we'll now be relying on JS for all HTML generation, including forms.  Finally, notice each controller action renders a response in JSON format, which is what we want.  Ideally, we ought to use a serializer to format and dictate exactly what to include in our JSON responses.  Options include gems like [Jbuilder] and [FastJsonapi].  We could also build our own custom serializer, build inline response hashes, or just use the [`#to_json`] method, which is what we'll do in this example for simplicity.
+We have scaffolded a user, added `bcrypt`, and created some seed data.  Let's have a look at what Rails's scaffold generator gives us for a controller since we used the `--api` flag.  Notice we have a two private methods, `#set_user` to grab the user when the `:id` exists in the URL, and `#user_params` to enforce ["strong params"].  Notice the absence of `#new` and `#edit` actions, since we'll now be relying on JS for all HTML generation, including forms.  Finally, notice each controller action renders a response in JSON format, which is what we want.  Ideally, we ought to use a serializer to format and dictate exactly what to include in our JSON responses.  Options include gems like [Jbuilder] and [FastJsonapi].  We could also build our own custom serializer, build inline response hashes, or just use the [`#to_json`] method, which is what we'll do in this example for simplicity.
 
 The `#index` action is quite simple here:
 ```ruby
@@ -182,9 +119,9 @@ def index
   render json: @users.to_json(only: [:id, :name, :email]), status: :ok
 end
 ```
-_Note: of course, it may not make sense to have a users index, but this is just for the demo..._
+_Note: Of course, it may not make sense to have a users index, but this is just for the demo..._
 
-Let's run our Rails server and see what we get.  We've left the default settings, so our Rails server is running on `http://localhost:3000`.  _Another note here: it might be a good idea to namespace your API with "api" and/or a version number, such as `http://localhost:3000/api/v1/users`.  Again, not the focus of this blog, so we're sticking to bare bones on this front._  Navigating to `http://localhost:3000/users` gives us our JSON response:
+Let's run our Rails server and see what we get.  We've left the default settings, so our Rails server is running on `http://localhost:3000`.  _Another note here: It might be a good idea to namespace your API with "api" and/or a version number, such as `http://localhost:3000/api/v1/users`.  Again, not the focus of this blog, so we're sticking to bare bones on this front._  Navigating to `http://localhost:3000/users` gives us our JSON response:
 
 ```json
 [
@@ -201,7 +138,7 @@ Let's run our Rails server and see what we get.  We've left the default settings
 ]
 ```
 
-OK let's see what we've got when our JS frontend talks to our Rails backend!  What frontend?  Your frontend might be a [React] application or plain old Vanilla JS.  For the sake of this blog, we'll be serving our JS frontend from `http://localhost:8000`.  Let's see what happens when we fire off a `fetch` request to get our users.
+Let's see what we've got when our JS frontend talks to our Rails backend!  What frontend?  Your frontend might be a [React] application or plain old Vanilla JS.  For the sake of this blog, we'll be serving our JS frontend from `http://localhost:8000`.  Let's see what happens when we fire off a `fetch` request to get our users.
 
 ```javascript
   fetch("http://localhost:3000/users")
@@ -224,14 +161,14 @@ Done.  Now we've got a JS frontend communicating with a Rails JSON API backend. 
 
 **Authorization**: Once we've established the user's identity, ensure the user is allowed to do the thing the user is trying to do.
 
-This blog focuses on authentication.  _(Although we briefly mentioned authorization in the quick guide.)_
+This blog focuses on authentication.  _(There is a small authorization example at the end.)_
 
 To keep track of user sessions, we need signup, login, and logout functionality.  Let's start with signup.  Signup represents creating a user.  From there, it's up to you, the developer, whether you send the user back to a login page or log the user in automatically on signup.  Let's go with the latter for this example.
 
 Suppose we have a signup form that gathers a user's name, email, and password.  We put the attributes into an object and pass it to the function we're using to send our POST request.  We might put together a request that looks something like this:
 ```javascript
   // suppose our `userData` is `{user: {name: "Felicia", email: "felicia@felicia.com", password: "felicia"}}`
-  fetch("http://localhost:3000", {
+  fetch("http://localhost:3000/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -242,13 +179,12 @@ Suppose we have a signup form that gathers a user's name, email, and password.  
     .then(response => response.json())
     .then(console.log)
 ```
-_Note: notice the `:user` key in `userData`... Rails will attempt to [wrap params] in the appropriate key and it might work as long as all properties match columns in the database table.  Since bcrypt uses a column of `password_digest` but a setter method of `#password=`, we have to specify what to allow.  Here, we're choosing to wrap the incoming params under a top-level key of `:user`, while adjusting our strong params method as follows:_
+_Note:  In this example `userData` has a top-level key of `:user`, which is apparently required by our `#user_params` method -- the ["strong params"] feature used to whitelist attributes for creating or updating model records.  We don't actually need the `:user` key, though, since Rails will [wrap params] by default.  True to form with Rails, of course, this feature is totally configurable.  In our example, though, we just need to update `#user_params` so the whitelisted attributes include `password` rather than `password_digest`, which is what we got from the scaffold generator.  Beware the scaffold generator; the resulting code may be too much, too little, or not exactly what you need..._
 ```ruby
 def user_params
   params.require(:user).permit(:name, :email, :password)
 end
 ```
-_Be careful using `scaffold` generators as they might not give you the code you need, or too much or too little._
 
 Anyway, now let's see what the console shows us:
 ```
@@ -256,7 +192,11 @@ Anyway, now let's see what the console shows us:
 ```
 Success!  But wait, we're talking about auth...?  Right now, even though we can create a user, there is no session.  So neither the frontend nor the backend is aware of who the current user is.  Let's fix that.
 
-Let's head back to our backend to continue our authentication configuration.  Hopefully you are familiar with using a basic auth setup on a full Rails app -- one where Rails is serving the views via `.erb` files.  Basically, we're going to use [Rails's `session` hash] to store an identifiable bit of info about a logged in user after signing up or logging in.  Logging out involves clearing the `session` hash.  Here are some likely helper methods we might include in `ApplicationController`:
+_Semantics around the word "session": In this blog, we've mentioned user sessions and Rails's `session`.  Session used with no code highlighting just refers to a session, as in a period of time between a user logging in and logging out.  When we say `session` as a code snippet, we're referring to a tool provided by Rails.  We say "Rails's `session` hash".  It's not really just a hash, although it kinda looks like it the way we use it.  In Rails controllers, `session` is actually an instance of the [`ActionDispatch::Request::Session`] class.  Technically, it's an invocation of `self.session` -- the getter method for said `ActionDispatch::Request::Session` instance.  Too much?  OK, we'll bend the language a bit and stick with "`session` hash", since that's what it feels like._
+
+Let's head back to our backend to continue our authentication configuration.  Hopefully you are familiar with using a basic auth setup on a full Rails app -- one where Rails is serving the views via `.erb` files.  Basically, we're going to use [Rails's `session` hash] to store an identifiable bit of info about a logged in user after signing up or logging in.  Logging out involves clearing the `session` hash.  
+
+Here are some likely helper methods we might include in `ApplicationController`:
 
 ```ruby
   def current_user
@@ -299,7 +239,7 @@ end
 
 # DELETE /logout
 def logout
-  session.clear
+  reset_session
   # redirect back to a home or landing page
 end
 ```
@@ -333,7 +273,7 @@ def login
 end
 
 def logout
-  session.clear
+  reset_session
   render json: {
     message: "Successfully logged out"
   }, status: :ok
@@ -480,7 +420,52 @@ And now, when we go to sign Mo up, then refresh the page and check the console:
 the current user is {id: 10, name: "Mo", email: "mo@mo.com"}
 ```
 
-YASSSSSS!!!!  Now, of course, instead of just logging to the console, we'd likely do something with our user on the front end.  Maybe stash it into whatever state management system we're using, whether it's React state, [Redux], or any other flavor or JS we like.  And, of course, since we're building an SPA, instead of refreshing the page to get results, we'll want to update our DOM by invoking the proper methods and functions we've built to do so on our front end.  Which is a whole other thing, altogether.
+Yaaaaaayyy!!!!  
+
+If we've defined our logout in `config/routes.rb` route as
+
+`delete "/logout", to: "sessions#logout"`
+
+then we could test logout functionality with:
+
+```js
+fetch("http://localhost:3000/logout", {
+  method: "DELETE",
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  }
+})
+  .then(response => response.json())
+  .then(console.log)
+```
+We should see in our console:
+```js
+{message: Successfully logged out}
+```
+Refresh, and watch the console again:
+```
+the current user is {message: "No one is currently logged in"}
+```
+
+And that's it!  Now your Rails responses will include an HTTP-only cookie with session info.  And each AJAX request with `credentials: "include"` will send that cookie back to be authenticated.
+
+Of course, instead of just logging responses to the console, we'd likely do something with them on the front end.  Maybe stash the current user into whatever state management system we're using, whether it's React state, [Redux], or any other flavor or JS we like.  And, of course, since we're building an SPA, instead of refreshing the page to get results, we'll want to update our DOM by invoking the proper methods and functions we've built to do so on our front end.  Which is a whole other thing, altogether.
+
+For authorization, protect your controller actions.  For example, suppose we've added a `Secret` model and associations such that a user `has_many :secrets` and a secret `belongs_to :user`.  If we don't want anyone but the secret's owner to see a secret, then in `SecretsController`:
+```ruby
+  def show
+    @secret = Secret.find(params[:id])
+    if @secret.user == current_user
+      render json: @secret.to_json(only: [:content, :id]), status: :ok
+    else
+      render json: {
+        error: "Those aren't your secrets!"
+      }, status: :unauthorized
+    end
+  end
+```
 
 What do you think?  That's pretty much it!  Comments and feedback are welcome.  But be nice.
 
@@ -512,6 +497,8 @@ Access to fetch at 'http://localhost:3000/users' from origin 'http://localhost:8
 [jQuery's `.ajax()`]: https://api.jquery.com/jquery.ajax/
 [read the docs]: https://github.com/codahale/bcrypt-ruby
 [wrap params]: https://api.rubyonrails.org/v5.2.3/classes/ActionController/ParamsWrapper.html
+["strong params"]: https://edgeapi.rubyonrails.org/classes/ActionController/StrongParameters.html
+[`ActionDispatch::Request::Session`]: https://github.com/rails/rails/blob/master/actionpack/lib/action_dispatch/request/session.rb
 [Fetch API]: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 [FastJsonapi]: https://github.com/Netflix/fast_jsonapi
 [`CookieStore`]: https://api.rubyonrails.org/v5.2.1/classes/ActionDispatch/Session/CookieStore.html
