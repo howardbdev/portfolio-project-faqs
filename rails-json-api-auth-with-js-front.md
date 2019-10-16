@@ -351,7 +351,7 @@ _Restarts Rails server, fills out signup form with Darlene's info, refreshes to 
 the current user is {message: "No one is currently logged in"}
 ```
 
-What gives?  So not only did we need to tell Rails to look out for session cookie info, we also need to tell _JavaScript_ to _include_ said cookies in our AJAX requests!  BUT WAIT... Rails is, well, [Ruby on Rails], with tons of helper methods and "magic", and [JavaScript] is, well, not Rails!  And we've disconnected our application so that we have a totally separate frontend and backend.  So how do we take this "final" step?  We Google, "how to include credentials in a fetch request"... And if we're me, we tack "MDN" to the front of that, so "MDN how to include credentials in a fetch request"
+What gives?  So not only did we need to tell Rails to look out for session cookie info, we also need to tell _JavaScript_ to _include_ said cookies in our AJAX requests!  BUT WAIT... Rails is, well, [Ruby on Rails], with tons of helper methods and "magic", and [JavaScript] is, well, not Rails!  And we've disconnected our application so that we have a totally separate frontend and backend.  So how do we take this "final" step?  We Google, "how to include credentials in a fetch request"... And if we're me, we tack "MDN" to the front of that, so "MDN how to include credentials in a fetch request".
 
 The first hit is [MDN's "Using Fetch"] article, where it says
 
