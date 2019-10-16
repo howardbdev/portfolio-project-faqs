@@ -448,7 +448,7 @@ Refresh, and watch the console again:
 ```
 the current user is {message: "No one is currently logged in"}
 ```
-_Wait, why did we [use POST as our HTTP method for logout]? What about GET, or maybe DELETE?  Good question.  Although we're not deleting a record from a database, it does seem like we are "deleting" something, albeit an abstract something -- the user session.  However if we [compare MDN's descriptions of HTTP methods] notice POST's description is more open to what's happening here.  DELETE seems to imply we're deleting an actual resource, which we're not.  Of course, you're encouraged to [read] [more] [about it] and decide which verb you with to use for logout on your app._
+_Wait, why did we [use POST as our HTTP method for logout]? What about GET, or maybe DELETE?  Good question.  Although we're not deleting a record from a database, it does seem like we are "deleting" something, albeit an abstract something -- the user session.  However if we [compare MDN's descriptions of HTTP methods] notice POST's description is more open to what's happening here.  DELETE seems to imply we're deleting an actual resource, which we're not.  Of course, you're encouraged to [read] [more] [about it] and decide which HTTP method to use for logout on your app._
 
 And that's it!  Now your Rails responses will include an HTTP-only cookie with session info.  And each AJAX request with `credentials: "include"` will send that cookie back to be authenticated.
 
