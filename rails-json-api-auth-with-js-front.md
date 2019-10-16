@@ -179,7 +179,7 @@ Suppose we have a signup form that gathers a user's name, email, and password.  
     .then(response => response.json())
     .then(console.log)
 ```
-_Note:  In this example the incoming `userData` has a top-level key of `:user`, which is apparently required by our `#user_params` method -- the ["strong params"] feature used to whitelist our attributes for creating or updating model attributes.  We don't actually need the `:user` key, though, since Rails will [wrap params] by default (true to form with Rails, of course, this feature is totally configurable).  In our example, we just need to update `#user_params` so the whitelisted attributes include `password` rather than `password_digest`, which is what we got from the scaffold generator.  Beware the scaffold generator; the resulting code may be too much, too little, or not exactly what you need..._
+_Note:  In this example `userData` has a top-level key of `:user`, which is apparently required by our `#user_params` method -- the ["strong params"] feature used to whitelist attributes for creating or updating model records.  We don't actually need the `:user` key, though, since Rails will [wrap params] by default.  True to form with Rails, of course, this feature is totally configurable.  In our example, though, we just need to update `#user_params` so the whitelisted attributes include `password` rather than `password_digest`, which is what we got from the scaffold generator.  Beware the scaffold generator; the resulting code may be too much, too little, or not exactly what you need..._
 ```ruby
 def user_params
   params.require(:user).permit(:name, :email, :password)
