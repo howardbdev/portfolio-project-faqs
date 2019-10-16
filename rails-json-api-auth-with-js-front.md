@@ -225,7 +225,7 @@ def login
   end
 end
 
-# DELETE /logout
+# POST /logout
 def logout
   reset_session
   # redirect back to a home or landing page
