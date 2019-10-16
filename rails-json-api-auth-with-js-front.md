@@ -179,13 +179,12 @@ Suppose we have a signup form that gathers a user's name, email, and password.  
     .then(response => response.json())
     .then(console.log)
 ```
-_Note: notice the `:user` key in `userData`... Rails will attempt to [wrap params] in the appropriate key and it might work as long as all properties match columns in the database table.  Since bcrypt uses a column of `password_digest` but a setter method of `#password=`, we have to specify what to allow.  Here, we're choosing to wrap the incoming params under a top-level key of `:user`, while adjusting our strong params method as follows:_
+_Note:  In this example the incoming `userData` has a top-level key of `:user`, which is apparently required by our `#user_params` method -- the ["strong params"] feature used to whitelist our attributes for creating or updating model attributes.  We don't actually need the `:user` key, though, since Rails will [wrap params] by default (true to form with Rails, of course, this feature is totally configurable).  In our example, we just need to update `#user_params` so the whitelisted attributes include `password` rather than `password_digest`, which is what we got from the scaffold generator.  Beware the scaffold generator; the resulting code may be too much, too little, or not exactly what you need..._
 ```ruby
 def user_params
   params.require(:user).permit(:name, :email, :password)
 end
 ```
-_Be careful using `scaffold` generators as they might not give you the code you need, or too much or too little._
 
 Anyway, now let's see what the console shows us:
 ```
@@ -465,6 +464,7 @@ Access to fetch at 'http://localhost:3000/users' from origin 'http://localhost:8
 [jQuery's `.ajax()`]: https://api.jquery.com/jquery.ajax/
 [read the docs]: https://github.com/codahale/bcrypt-ruby
 [wrap params]: https://api.rubyonrails.org/v5.2.3/classes/ActionController/ParamsWrapper.html
+["strong params"]: https://edgeapi.rubyonrails.org/classes/ActionController/StrongParameters.html
 [Fetch API]: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 [FastJsonapi]: https://github.com/Netflix/fast_jsonapi
 [`CookieStore`]: https://api.rubyonrails.org/v5.2.1/classes/ActionDispatch/Session/CookieStore.html
