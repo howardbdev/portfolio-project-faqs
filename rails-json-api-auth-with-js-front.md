@@ -243,7 +243,9 @@ def create
     session[:user_id] = @user.id
     render json: @user.to_json(only: [:id, :name, :email]), status: :created
   else
-    render json: @user.errors, status: :unprocessable_entity
+    render json: {
+      error: @user.errors
+    }, status: :unprocessable_entity
   end
 end
 
