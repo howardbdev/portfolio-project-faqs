@@ -20,8 +20,12 @@ The `--api` flag removes a bunch of middleware from the generation of the Rails 
 
 If we want auth, though, it removes a little _too much_ middleware... more on that later.. Let's continue:
 
-We know we're going to want our Rails server to process AJAX requests from external domains, which means we need to enable [Cross Origin Resource Sharing], or CORS.  In the `Gemfile`, comment in the line that says
+We know we're going to want our Rails server to process AJAX requests from external domains, which means we need to enable [Cross Origin Resource Sharing], or CORS.
+
+In the `Gemfile`, comment in the line that says
+
 `gem 'rack-cors'`
+
 Then run `bundle install` again.
 
 Enabling the `rack-cors` gem is not enough -- we also need to adjust the CORS configuration.  So let's open `config/initializers/cors.rb`.  First, uncomment this code:
@@ -57,7 +61,7 @@ With our basic CORS config setup, let's pause and scaffold out a user model we c
 ```ruby
 gem 'bcrypt', '~> 3.1.7'
 ```
-_Note: the version number seen here is from running a `rails new` command with Rails 6.0.0... of course versions change and might be different for you if you're running the same command in the future... or in the past... or with different versions..._
+_Note: The version number seen here is from running a `rails new` command with Rails 6.0.0... of course versions change and might be different for you if you're running the same command in the future... or in the past... or with different versions..._
 
 Run `bundle install`.
 
@@ -115,9 +119,9 @@ def index
   render json: @users.to_json(only: [:id, :name, :email]), status: :ok
 end
 ```
-_Note: of course, it may not make sense to have a users index, but this is just for the demo..._
+_Note: Of course, it may not make sense to have a users index, but this is just for the demo..._
 
-Let's run our Rails server and see what we get.  We've left the default settings, so our Rails server is running on `http://localhost:3000`.  _Another note here: it might be a good idea to namespace your API with "api" and/or a version number, such as `http://localhost:3000/api/v1/users`.  Again, not the focus of this blog, so we're sticking to bare bones on this front._  Navigating to `http://localhost:3000/users` gives us our JSON response:
+Let's run our Rails server and see what we get.  We've left the default settings, so our Rails server is running on `http://localhost:3000`.  _Another note here: It might be a good idea to namespace your API with "api" and/or a version number, such as `http://localhost:3000/api/v1/users`.  Again, not the focus of this blog, so we're sticking to bare bones on this front._  Navigating to `http://localhost:3000/users` gives us our JSON response:
 
 ```json
 [
@@ -134,7 +138,7 @@ Let's run our Rails server and see what we get.  We've left the default settings
 ]
 ```
 
-OK let's see what we've got when our JS frontend talks to our Rails backend!  What frontend?  Your frontend might be a [React] application or plain old Vanilla JS.  For the sake of this blog, we'll be serving our JS frontend from `http://localhost:8000`.  Let's see what happens when we fire off a `fetch` request to get our users.
+Let's see what we've got when our JS frontend talks to our Rails backend!  What frontend?  Your frontend might be a [React] application or plain old Vanilla JS.  For the sake of this blog, we'll be serving our JS frontend from `http://localhost:8000`.  Let's see what happens when we fire off a `fetch` request to get our users.
 
 ```javascript
   fetch("http://localhost:3000/users")
