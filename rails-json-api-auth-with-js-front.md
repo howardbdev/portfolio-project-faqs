@@ -420,7 +420,7 @@ YASSSSSS!!!!  Now, of course, instead of just logging to the console, we'd likel
 
 And that's it!  Now your Rails responses will include an HTTP-only cookie with session info.  And each AJAX request with `credentials: "include"` will send that cookie back to be authenticated.
 
-For authorization, protect your controller actions.  For example, in `SecretsController`:
+For authorization, protect your controller actions.  For example, suppose we've added a `Secret` model and associations such that a user `has_many :secrets` and a secret `belongs_to :user`.  If we don't want anyone but the secret's owner to see a secret, then in `SecretsController`:
 ```ruby
   def show
     @secret = Secret.find(params[:id])
