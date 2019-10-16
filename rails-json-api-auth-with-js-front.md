@@ -196,18 +196,6 @@ _Semantics around the word "session": In this blog, we've mentioned user session
 
 Let's head back to our backend to continue our authentication configuration.  Hopefully you are familiar with using a basic auth setup on a full Rails app -- one where Rails is serving the views via `.erb` files.  Basically, we're going to use [Rails's `session` hash] to store an identifiable bit of info about a logged in user after signing up or logging in.  Logging out involves clearing the `session` hash using Rails's `#reset_session` method.  
 
-Here are some likely helper methods we might include in `ApplicationController`:
-
-```ruby
-  def current_user
-    User.find_by(id: session[:user_id])
-  end
-
-  def logged_in?
-    !!current_user
-  end
-```
-
 In the `users#create` action of a full Rails app, you may recall seeing code something like this:
 ```ruby
 # POST /users
@@ -279,7 +267,17 @@ def logout
   }, status: :ok
 end
 ```
+Here are some likely helper methods we might include in `ApplicationController`:
 
+```ruby
+  def current_user
+    User.find_by(id: session[:user_id])
+  end
+
+  def logged_in?
+    !!current_user
+  end
+```
 One more controller action that will probably prove useful is an action to get the current user if there is one.  This would likely be an endpoint we'll hit as soon as the app loads, so on `"DOMContentLoaded"` with JS or in `componentDidMount()` or `useEffect()`, if you're using [React].  Something like:
 
 ```ruby
