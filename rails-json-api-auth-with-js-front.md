@@ -163,6 +163,8 @@ Done.  Now we've got a JS frontend communicating with a Rails JSON API backend. 
 
 This blog focuses on authentication.  _(There is a small authorization example at the end.)_
 
+_Note: Regarding semantics around the word "session": In this blog, we've mentioned user sessions and Rails's `session`.  Session used with no code highlighting just refers to a session, as in a period of time between a user logging in and logging out.  When we say `session` as a code snippet, we're referring to a tool provided by Rails.  We say "Rails's `session` hash".  It's not really just a hash, although it kinda looks like it the way we use it.  In Rails controllers, `session` is actually an instance of the [`ActionDispatch::Request::Session`] class.  Technically, it's an invocation of `self.session` -- the getter method for said `ActionDispatch::Request::Session` instance.  Too much?  OK, we'll bend the language a bit and stick with "`session` hash", since that's what it feels like._
+
 To keep track of user sessions, we need signup, login, and logout functionality.  Let's start with signup.  Signup represents creating a user.  From there, it's up to you, the developer, whether you send the user back to a login page or log the user in automatically on signup.  Let's go with the latter for this example.
 
 Suppose we have a signup form that gathers a user's name, email, and password.  We put the attributes into an object and pass it to the function we're using to send our POST request.  We might put together a request that looks something like this:
@@ -191,8 +193,6 @@ Anyway, now let's see what the console shows us:
 {id: 5, name: "Felicia", email: "felicia@felicia.com"}
 ```
 Success!  But wait, we're talking about auth...?  Right now, even though we can create a user, there is no session.  So neither the frontend nor the backend is aware of who the current user is.  Let's fix that.
-
-_Semantics around the word "session": In this blog, we've mentioned user sessions and Rails's `session`.  Session used with no code highlighting just refers to a session, as in a period of time between a user logging in and logging out.  When we say `session` as a code snippet, we're referring to a tool provided by Rails.  We say "Rails's `session` hash".  It's not really just a hash, although it kinda looks like it the way we use it.  In Rails controllers, `session` is actually an instance of the [`ActionDispatch::Request::Session`] class.  Technically, it's an invocation of `self.session` -- the getter method for said `ActionDispatch::Request::Session` instance.  Too much?  OK, we'll bend the language a bit and stick with "`session` hash", since that's what it feels like._
 
 Let's head back to our backend to continue our authentication configuration.  Hopefully you are familiar with using a basic auth setup on a full Rails app -- one where Rails is serving the views via `.erb` files.  Basically, we're going to use [Rails's `session` hash] to store an identifiable bit of info about a logged in user after signing up or logging in.  Logging out involves clearing the `session` hash using Rails's `#reset_session` method.  
 
