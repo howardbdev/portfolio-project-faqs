@@ -168,7 +168,7 @@ To keep track of user sessions, we need signup, login, and logout functionality.
 Suppose we have a signup form that gathers a user's name, email, and password.  We put the attributes into an object and pass it to the function we're using to send our POST request.  We might put together a request that looks something like this:
 ```javascript
   // suppose our `userData` is `{user: {name: "Felicia", email: "felicia@felicia.com", password: "felicia"}}`
-  fetch("http://localhost:3000", {
+  fetch("http://localhost:3000/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
