@@ -1,6 +1,6 @@
 # FAQs - Resources for Students
 
-A collection of responses to some FAQs.  The title of the file represents the question.  Answers represent heavily subjective opinions of the author's own and do not represent the views of any organization or other persons.  The do not represent a final authority, or any kind of authority, regarding anything, anywhere, anyhow, under any circumstances :stuck_out_tongue_winking_eye:.
+A collection of responses to some FAQs.  The title of the file represents the question.  Answers represent heavily subjective opinions of the author's own and do not represent the views of any organization or other persons.  They do not represent a final authority, or any kind of authority, regarding anything, anywhere, anyhow, under any circumstances :stuck_out_tongue_winking_eye:.
 
 ## Contributing
 
